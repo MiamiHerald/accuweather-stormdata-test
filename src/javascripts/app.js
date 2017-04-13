@@ -17,6 +17,19 @@ $.getJSON( "https://api.accuweather.com/tropical/v1/storms/2016/AL/14/positions?
   plotPoints(data);
 });
 
+var cone = new L.geoJson();
+cone.addTo(map);
+
+$.ajax({
+  dataType: "json",
+  url: "cone.geojson",
+  success: function(data) {
+      $(data.features).each(function(key, data) {
+          cone.addData(data);
+      });
+  }
+});
+
 function plotPoints(data) {
   var arr = [];
 
