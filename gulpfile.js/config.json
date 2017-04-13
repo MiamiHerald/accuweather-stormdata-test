@@ -38,7 +38,8 @@
       "sass": {
         "indentedSyntax": true,
         "includePaths": [
-          "./node_modules/normalize.css"
+          "./node_modules/normalize.css",
+          "./node_modules/leaflet/dist/"
         ]
       },
       "extensions": ["sass", "scss", "css"]
