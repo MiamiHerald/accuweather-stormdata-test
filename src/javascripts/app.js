@@ -12,7 +12,7 @@ var mapId             = 'mapid',
     initCoords        = [25.7617, -80.1918],
     initZoom          = 13,
     mapBoxAccessToken = 'pk.eyJ1IjoiY2hyaXNkdWJ5YSIsImEiOiJjaXRkZDNydnkwMDY4MnRtOTA2Y3hoaGh4In0.kzOT6chkFRIklbX08xiGew',
-    mabBoxStyleURL    = 'https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?access_token=' + mapBoxAccessToken,
+    mabBoxStyleURL    = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=' + mapBoxAccessToken,
     stormURL          = 'https://api.accuweather.com/tropical/v1/storms/2016/AL/14/positions?apikey=2ce96fe9da724185a27db1e6a3ecf580',
     geoJsonURL        = 'cone.geojson',
     map               = L.map(mapId).setView(initCoords, initZoom),
@@ -48,26 +48,17 @@ function plotPoints(data) {
   // Render circle for each object in the Array,
   // also push the coordinates into polylineArray to create polyline
   $.each(data, function(index, value) {
-    var speed = ktsToMph(value.Movement.Speed.Imperial.Value);
+    var speed = ktsToMph(value.SustainedWind.Imperial.Value);
     var lat = value.Position.Latitude;
     var lon = value.Position.Longitude;
 
-    // var circle = L.circle([lat, lon], {
-    //   color: '#D81E5B',
-    //   fillColor: '#FFFD98',
-    //   fillOpacity: 0.5,
-    //   radius: getRadius(value.SustainedWind.Imperial.Value)
-    // }).addTo(map);
-    //
-    // circle.bindPopup(value.Storm.Name + ': ' + value.Status + ' - ' + speed + 'mph');
-
     var icon = L.icon({
-      iconUrl:      getIcon(value.SustainedWind.Imperial.Value),
+      iconUrl:      getIcon(speed),
       iconSize:     [40.5, 25], // size of the icon
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    L.marker([lat, lon], {icon: icon}).addTo(map);
+    L.marker([lat, lon], {icon: icon}).addTo(map)
+        .bindPopup(value.Storm.Name + ': ' + value.Status + ' - ' + speed + 'mph');;
 
     polylineArray.push([lat, lon]);
   });
@@ -82,30 +73,28 @@ function plotPoints(data) {
   map.fitBounds(polyline.getBounds());
 }
 
-function getIcon(wind) {
-  var windspeedInMph = ktsToMph(wind);
-
-  if (windspeedInMph > 155) {
+function getIcon(speed) {
+  if (speed > 155) {
     // category 5
-    return 'images/cat-5.png';
-  } else if (windspeedInMph >= 131 && windspeedInMph <= 155) {
+    return 'images/cat-5.svg';
+  } else if (speed >= 131 && speed <= 155) {
     // category 4
-    return 'images/cat-4.png';
-  } else if (windspeedInMph >= 111 && windspeedInMph <= 130) {
+    return 'images/cat-4.svg';
+  } else if (speed >= 111 && speed <= 130) {
     // category 3
-    return 'images/cat-3.png';
-  } else if (windspeedInMph >= 96 && windspeedInMph <= 110) {
+    return 'images/cat-3.svg';
+  } else if (speed >= 96 && speed <= 110) {
     // category 2
-    return 'images/cat-2.png';
-  } else if (windspeedInMph >= 74 && windspeedInMph <= 95) {
+    return 'images/cat-2.svg';
+  } else if (speed >= 74 && speed <= 95) {
     // category 1
-    return 'images/cat-1.png';
-  } else if (windspeedInMph >= 39 && windspeedInMph <= 73) {
+    return 'images/cat-1.svg';
+  } else if (speed >= 39 && speed <= 73) {
     // tropical storm
-    return 'images/trop-storm.png';
-  } else if (windspeedInMph <= 38) {
+    return 'images/trop-storm.svg';
+  } else if (speed <= 38) {
     // tropical depression
-    return 'images/trop-depression.png';
+    return 'images/trop-depression.svg';
   }
 }
 
