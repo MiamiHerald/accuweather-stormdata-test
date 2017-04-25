@@ -1,4 +1,18 @@
 {
-  "javascripts/app.js": "javascripts/app-f33b81921de21b9d2ea0.js",
+  "images/cat-1.png": "images/cat-1-5e2fa63ab1.png",
+  "images/cat-1.svg": "images/cat-1-2a85a55565.svg",
+  "images/cat-2.png": "images/cat-2-ef13ac7571.png",
+  "images/cat-2.svg": "images/cat-2-f491b73dc6.svg",
+  "images/cat-3.png": "images/cat-3-c5da8fb244.png",
+  "images/cat-3.svg": "images/cat-3-53ab9f0597.svg",
+  "images/cat-4.png": "images/cat-4-67d0750a69.png",
+  "images/cat-4.svg": "images/cat-4-d867df6258.svg",
+  "images/cat-5.png": "images/cat-5-06bd48aaf8.png",
+  "images/cat-5.svg": "images/cat-5-71712ddda1.svg",
+  "images/trop-depression.png": "images/trop-depression-805d9244e2.png",
+  "images/trop-depression.svg": "images/trop-depression-7aa7f78452.svg",
+  "images/trop-storm.png": "images/trop-storm-af3b62fcc5.png",
+  "images/trop-storm.svg": "images/trop-storm-a2d8a78212.svg",
+  "javascripts/app.js": "javascripts/app-206839d9d7b12ef86126.js",
   "stylesheets/app.css": "stylesheets/app-04541c3d32.css"
 }
